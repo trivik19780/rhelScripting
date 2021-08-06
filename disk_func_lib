@@ -1,0 +1,15 @@
+#!/usr/bin/bash 
+
+getdisk_info(){
+if [ $# -eq 1 ];then
+	mount | grep -w $1 > /dev/null
+	if [ $? -eq 0 ];then
+		return `df -h | grep -w $1 | awk '{print $5}' | tr "%" " "`
+	else
+		echo "argument needs to be a mount point"
+	fi
+else
+	echo "usage $0 <mountpointname"
+fi
+}
+
